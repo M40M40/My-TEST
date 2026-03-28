@@ -1,14 +1,7 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { GEMINI_PROMPT, QUESTIONS } from '../constants';
-import { VitalCode, type Answers, type Report, type Score } from '../types';
-
-const apiKey = "AIzaSyDi0Sgo0xjTrBGPTGvjU1AVsycNWaTb-Dk";
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-export const getVitalCodeReport = async (answers: Answers): Promise<Report> => {
 import { GoogleGenAI, Type } from "@google/genai";
 import { GEMINI_PROMPT, QUESTIONS } from '../constants';
 import { VitalCode, type Answers, type Report, type Score } from '../types';
-const apiKey = "AIzaSyDi0Sgo0xjTrBGPTGvjU1AVsycNWaTb-Dk";
+
 export const getVitalCodeReport = async (answers: Answers): Promise<Report> => {
   // 1. Cálculo matemático de puntuaciones (se mantiene igual por precisión)
   const scores: Score[] = Object.values(VitalCode).map(code => {
@@ -25,8 +18,9 @@ export const getVitalCodeReport = async (answers: Answers): Promise<Report> => {
   const sortedScores = [...scores].sort((a, b) => b.puntos - a.puntos);
   const principalCandidate = sortedScores[0].codigo;
 
-  const genAI = new GoogleGenerativeAI("AIzaSyDi0Sgo0xjTrBGPTGvjU1AVsycNWaTb-Dk");
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
+  // 2. Definición del Schema (necesario para la estructura del informe)
   const responseSchema = {
     type: Type.OBJECT,
     properties: {
