@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GEMINI_PROMPT, QUESTIONS } from '../constants';
 import { VitalCode, type Answers, type Report, type Score } from '../types';
 const genAI = new GoogleGenerativeAI("AIzaSyDi0Sgo0xjTrBGPTGvjU1AVsycNWaTb-Dk");
