@@ -1,7 +1,8 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GEMINI_PROMPT, QUESTIONS } from '../constants';
 import { VitalCode, type Answers, type Report, type Score } from '../types';
-const genAI = new GoogleGenerativeAI("AIzaSyDi0Sgo0xjTrBGPTGvjU1AVsycNWaTb-Dk");
+
+const apiKey = "AIzaSyDi0Sgo0xjTrBGPTGvjU1AVsycNWaTb-Dk";
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 export const getVitalCodeReport = async (answers: Answers): Promise<Report> => {
 import { GoogleGenAI, Type } from "@google/genai";
@@ -25,7 +26,6 @@ export const getVitalCodeReport = async (answers: Answers): Promise<Report> => {
   const principalCandidate = sortedScores[0].codigo;
 
   const genAI = new GoogleGenerativeAI("AIzaSyDi0Sgo0xjTrBGPTGvjU1AVsycNWaTb-Dk");
-
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   const responseSchema = {
     type: Type.OBJECT,
