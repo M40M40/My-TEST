@@ -5,7 +5,7 @@ import WelcomeScreen from './components/WelcomeScreen';
 import TestScreen from './components/TestScreen';
 import LoadingScreen from './components/LoadingScreen';
 import ResultsScreen from './components/ResultsScreen';
-import { getVitalCodeReport } from './services/geminiService';
+
 import type { Answers, Report } from './types';
 
 type AppState = 'intro' | 'login' | 'welcome' | 'test' | 'loading' | 'results';
@@ -36,17 +36,31 @@ const App: React.FC = () => {
   }
 
   const handleTestSubmit = async (answers: Answers) => {
-    setAppState('loading');
-    try {
-      const result = await getVitalCodeReport(answers);
-      setReport(result);
-      setAppState('results');
-    } catch (err) {
-      console.error("Error generating report:", err);
-      setError("Hubo un error al generar tu informe. Por favor, inténtalo de nuevo más tarde.");
-      setAppState('results'); // Show results screen with error
+  setAppState('loading');
+
+  try {
+    const res = await fetch('/api/report', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ answers }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data?.error || 'Error al generar el informe.');
     }
-  };
+
+    setReport(data);
+    setAppState('results');
+  } catch (err) {
+    console.error("Error generating report:", err);
+    setError("Hubo un error al generar tu informe. Por favor, inténtalo de nuevo más tarde.");
+    setAppState('results');
+  }
+};
 
   const renderContent = () => {
     switch (appState) {
