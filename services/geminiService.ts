@@ -21,7 +21,7 @@ export const getVitalCodeReport = async (answers: Answers): Promise<Report> => {
 
   const genAI = new GoogleGenerativeAI("AIzaSyDi0Sgo0xjTrBGPTGvjU1AVsycNWaTb-Dk");
 
-  // 2. Definición del Schema (necesario para la estructura del informe)
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   const responseSchema = {
     type: Type.OBJECT,
     properties: {
