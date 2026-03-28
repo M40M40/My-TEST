@@ -1,8 +1,8 @@
 
 import { GoogleGenAI } from '@google/genai';
-import { GEMINI_PROMPT, QUESTIONS } from '../constants';
-import { VitalCode } from '../types';
-import type { Score } from '../types';
+import { GEMINI_PROMPT, QUESTIONS } from '../constants.js';
+import { VitalCode } from '../types.js';
+import type { Score } from '../types.js';
 
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
