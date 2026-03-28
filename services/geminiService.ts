@@ -2,7 +2,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { GEMINI_PROMPT, QUESTIONS } from '../constants';
 import { VitalCode, type Answers, type Report, type Score } from '../types';
-
+const apiKey = "TU_CODIGO_AIZA_AQUÍ";
 export const getVitalCodeReport = async (answers: Answers): Promise<Report> => {
   // 1. Cálculo matemático de puntuaciones (se mantiene igual por precisión)
   const scores: Score[] = Object.values(VitalCode).map(code => {
