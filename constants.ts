@@ -2,72 +2,54 @@
 import { VitalCode, type Question } from './types';
 
 export const QUESTIONS: Question[] = [
-  // Líder
-  { id: 1, text: "Siento una fuerte necesidad de guiar a otros hacia una meta común.", code: VitalCode.Lider },
-  { id: 2, text: "Me entusiasma pensar en el futuro y crear visiones a largo plazo.", code: VitalCode.Lider },
-  { id: 3, text: "Tomo la iniciativa en grupos para asegurarme de que las cosas se hagan.", code: VitalCode.Lider },
-  { id: 4, text: "La gente suele buscarme para que les dé dirección e inspiración.", code: VitalCode.Lider },
-  { id: 5, text: "Prefiero liderar a seguir, incluso si eso implica más responsabilidad.", code: VitalCode.Lider },
-  
-  // Cuidador
-  { id: 6, text: "Me siento realizado/a al ayudar y apoyar a los demás.", code: VitalCode.Cuidador },
-  { id: 7, text: "Puedo percibir fácilmente las emociones de las personas que me rodean.", code: VitalCode.Cuidador },
-  { id: 8, text: "Priorizo el bienestar de los demás, a veces por encima del mío.", code: VitalCode.Cuidador },
-  { id: 9, text: "La gente confía en mí para escuchar sus problemas sin juzgarlos.", code: VitalCode.Cuidador },
-  { id: 10, text: "Crear un ambiente de armonía y cuidado es muy importante para mí.", code: VitalCode.Cuidador },
+  { id: 1, text: "Cuando un grupo duda sobre qué hacer, suelen acabar mirando en tu dirección para decidir.", code: VitalCode.Lider, inversa: false },
+  { id: 2, text: "Cuando hay silencio antes de elegir, tiendes a romperlo con una propuesta clara.", code: VitalCode.Lider, inversa: false },
+  { id: 3, text: "Cuando toca elegir plan, prefieres esperar a ver qué deciden los demás y te adaptas sin problema.", code: VitalCode.Lider, inversa: true },
+  { id: 4, text: "Prefieres seguir siempre lo que otros ya han probado antes, en vez de proponer algo nuevo.", code: VitalCode.Lider, inversa: true },
 
-  // Analista
-  { id: 11, text: "Disfruto desglosando problemas complejos en partes más pequeñas.", code: VitalCode.Analista },
-  { id: 12, text: "Tomo decisiones basadas en la lógica y los datos, no en las emociones.", code: VitalCode.Analista },
-  { id: 13, text: "Me interesa profundamente entender cómo funcionan las cosas.", code: VitalCode.Analista },
-  { id: 14, text: "Prefiero la objetividad y la precisión en mi trabajo y comunicación.", code: VitalCode.Analista },
-  { id: 15, text: "Encuentro satisfacción en la investigación y el análisis detallado.", code: VitalCode.Analista },
+  { id: 5, text: "En una mesa con tensión, cambias de tema o propones algo que relaja el ambiente.", code: VitalCode.Idealista, inversa: false },
+  { id: 6, text: "Si dos personas que aprecias se distancian, sueles acercarte a cada una para tender puentes después.", code: VitalCode.Idealista, inversa: false },
+  { id: 7, text: "Si presencias un rifirrafe entre dos conocidos, sueles seguir tu camino sin involucrarte.", code: VitalCode.Idealista, inversa: true },
+  { id: 8, text: "En charlas grupales, prefieres no meterte y dejar que cada quien se arregle como pueda.", code: VitalCode.Idealista, inversa: true },
 
-  // Creativo
-  { id: 16, text: "Tengo una imaginación muy activa y constantemente genero nuevas ideas.", code: VitalCode.Creativo },
-  { id: 17, text: "Me expreso mejor a través del arte, la escritura o alguna otra forma creativa.", code: VitalCode.Creativo },
-  { id: 18, text: "Me siento atraído/a por lo original, lo poco convencional y lo simbólico.", code: VitalCode.Creativo },
-  { id: 19, text: "A menudo me pierdo en mis pensamientos e ideas.", code: VitalCode.Creativo },
-  { id: 20, text: "La belleza y la estética son fundamentales en mi vida.", code: VitalCode.Creativo },
-  
-  // Organizador
-  { id: 21, text: "Me siento más cómodo/a cuando hay un plan y una estructura claros.", code: VitalCode.Organizador },
-  { id: 22, text: "La fiabilidad y la puntualidad son valores muy importantes para mí.", code: VitalCode.Organizador },
-  { id: 23, text: "Disfruto creando sistemas, listas y procesos para mejorar la eficiencia.", code: VitalCode.Organizador },
-  { id: 24, text: "Prefiero seguir las reglas y procedimientos establecidos.", code: VitalCode.Organizador },
-  { id: 25, text: "El orden y la planificación me ayudan a sentirme en control.", code: VitalCode.Organizador },
-  
-  // Explorador
-  { id: 26, text: "Siento un fuerte deseo de viajar y experimentar nuevas culturas.", code: VitalCode.Explorador },
-  { id: 27, text: "Valoro mi independencia y libertad por encima de todo.", code: VitalCode.Explorador },
-  { id: 28, text: "Me aburro fácilmente con la rutina y busco constantemente la novedad.", code: VitalCode.Explorador },
-  { id: 29, text: "Estoy dispuesto/a a tomar riesgos para vivir nuevas aventuras.", code: VitalCode.Explorador },
-  { id: 30, text: "Aprender a través de la experiencia directa es mi forma preferida.", code: VitalCode.Explorador },
-  
-  // Idealista
-  { id: 31, text: "Creo firmemente que puedo contribuir a hacer del mundo un lugar mejor.", code: VitalCode.Idealista },
-  { id: 32, text: "Me involucro en causas sociales o comunitarias que considero justas.", code: VitalCode.Idealista },
-  { id: 33, text: "Siento una fuerte conexión con la humanidad en su conjunto.", code: VitalCode.Idealista },
-  { id: 34, text: "Me motiva luchar por los derechos y la dignidad de las personas.", code: VitalCode.Idealista },
-  { id: 35, text: "Mis valores y principios éticos guían mis acciones más importantes.", code: VitalCode.Idealista },
-  
-  // Guerrero
-  { id: 36, text: "No temo decir la verdad, incluso si es incómoda o genera conflicto.", code: VitalCode.Guerrero },
-  { id: 37, text: "Cuando creo en algo, lo defiendo con pasión y determinación.", code: VitalCode.Guerrero },
-  { id: 38, text: "Me crezco ante los desafíos y la adversidad.", code: VitalCode.Guerrero },
-  { id: 39, text: "Me siento impulsado/a a proteger a los débiles y luchar contra la injusticia.", code: VitalCode.Guerrero },
-  { id: 40, text: "Prefiero la confrontación directa y honesta a evitar los problemas.", code: VitalCode.Guerrero },
+  { id: 9, text: "Entre amigos, cuando cuentas una historia, la gente suele engancharse o reírse contigo.", code: VitalCode.Creativo, inversa: false },
+  { id: 10, text: "Al preparar un detalle para alguien, te sale hacer algo distinto a lo típico.", code: VitalCode.Creativo, inversa: false },
+  { id: 11, text: "Si falta una pieza o algo no encaja tal cual, prefieres parar y esperar instrucciones exactas antes de continuar.", code: VitalCode.Creativo, inversa: true },
+  { id: 12, text: "Prefieres que todo se haga tal como está en el manual y no te gusta improvisar.", code: VitalCode.Creativo, inversa: true },
 
-  // Intuitivo
-  { id: 41, text: "A menudo confío en mi intuición o 'corazonadas' para tomar decisiones.", code: VitalCode.Intuitivo },
-  { id: 42, text: "Siento que hay una dimensión más profunda o espiritual en la vida.", code: VitalCode.Intuitivo },
-  { id: 43, text: "Percibo patrones y conexiones que otros no suelen ver.", code: VitalCode.Intuitivo },
-  { id: 44, text: "Necesito tiempo a solas para la reflexión y la introspección.", code: VitalCode.Intuitivo },
-  { id: 45, text: "Me interesan los sueños, los símbolos y los misterios de la conciencia.", code: VitalCode.Intuitivo },
+  { id: 13, text: "Antes de empezar el día, ordenas mentalmente lo que harás y en qué momento.", code: VitalCode.Organizador, inversa: false },
+  { id: 14, text: "Cuando algo es grande, lo troceas en pasos alcanzables y te marcas pequeñas metas.", code: VitalCode.Organizador, inversa: false },
+  { id: 15, text: "Sueles empezar las cosas “sobre la marcha”, sin pensar mucho en el orden; ya irás viendo después.", code: VitalCode.Organizador, inversa: true },
+  { id: 16, text: "Te incomoda planear, prefieres improvisar aunque luego salgan fallos.", code: VitalCode.Organizador, inversa: true },
+
+  { id: 17, text: "Caminando por una ciudad nueva, te metes por una callejuela solo porque te llama.", code: VitalCode.Explorador, inversa: false },
+  { id: 18, text: "Si te proponen un plan inesperado para esa misma tarde, a menudo dices que sí sin darle demasiadas vueltas.", code: VitalCode.Explorador, inversa: false },
+  { id: 19, text: "Tiendes a volver a los mismos sitios y rutinas porque eso te hace sentir seguro.", code: VitalCode.Explorador, inversa: true },
+  { id: 20, text: "Prefieres evitar lo desconocido porque te resulta incómodo salir de lo de siempre.", code: VitalCode.Explorador, inversa: true },
+
+  { id: 21, text: "Si alguien de tu gente tarda en dar señales, no te quedas tranquilo hasta saber que está bien.", code: VitalCode.Cuidador, inversa: false },
+  { id: 22, text: "Ofreces ayuda práctica a conocidos aunque no la hayan pedido explícitamente.", code: VitalCode.Cuidador, inversa: false },
+  { id: 23, text: "Sueles pensar que cada adulto debería arreglárselas solo y evitas ofrecer ayuda si no te la piden.", code: VitalCode.Cuidador, inversa: true },
+  { id: 24, text: "Crees que cada quien debería cargar con lo suyo y no te involucras en lo que no te toca.", code: VitalCode.Cuidador, inversa: true },
+
+  { id: 25, text: "A veces prefieres quedarte a solas dándole una vuelta a lo que te ha pasado para entenderlo mejor.", code: VitalCode.Analista, inversa: false },
+  { id: 26, text: "Ante un momento difícil, te preguntas qué aprendizaje puede dejarte.", code: VitalCode.Analista, inversa: false },
+  { id: 27, text: "Cuando algo te remueve, procuras distraerte rápido y no pensar demasiado en ello.", code: VitalCode.Analista, inversa: true },
+  { id: 28, text: "Te incomoda reflexionar demasiado, prefieres pasar página sin darle vueltas.", code: VitalCode.Analista, inversa: true },
+
+  { id: 29, text: "Cuando te entra un dinero extra, piensas primero en cómo hacerlo rendir más que en gastarlo.", code: VitalCode.Guerrero, inversa: false },
+  { id: 30, text: "Al ver un local o proyecto flojo, te vienen a la cabeza cambios concretos para que funcione mejor.", code: VitalCode.Guerrero, inversa: false },
+  { id: 31, text: "Hablar de dinero te incomoda y prefieres que otra persona lleve ese tema.", code: VitalCode.Guerrero, inversa: true },
+  { id: 32, text: "Prefieres no pensar en inversiones ni estrategias, eso te da pereza.", code: VitalCode.Guerrero, inversa: true },
+
+  { id: 33, text: "Te ha pasado seguir una sensación interna y luego comprobar que era la elección acertada.", code: VitalCode.Intuitivo, inversa: false },
+  { id: 34, text: "Al conocer a alguien, esa primera impresión que te deja suele coincidir con lo que descubres después.", code: VitalCode.Intuitivo, inversa: false },
+  { id: 35, text: "Sueles pensar que las coincidencias son pura casualidad y no les das ninguna importancia al decidir.", code: VitalCode.Intuitivo, inversa: true },
+  { id: 36, text: "No sueles hacer caso a tus corazonadas porque crees que no sirven para nada.", code: VitalCode.Intuitivo, inversa: true },
 ];
 
 export const GEMINI_PROMPT = `
-Eres un psicólogo experto y coach de vida, especializado en el sistema de los '9 Códigos Vitales'. Tu tarea es analizar los resultados de un test de personalidad y generar un informe completo, inspirador y profundo.
+Eres un psicólogo experto y coach de vida, especializado en el sistema de los '9 Códigos Vitales'. Tu tarea es analizar los resultados de un test de personalidad y generar un informe inspirador y profundo, pero más ligero y directo.
 
 Recibirás un listado de puntuaciones ya calculadas por el sistema.
 
@@ -87,9 +69,9 @@ FORMATO DE SALIDA JSON:
     "puntuaciones": [{"codigo": "string", "puntos": number}],
     "informe": {
       "perfil": "string",
-      "descripcion": "string (profunda y alentadora, al menos 3 párrafos)",
-      "fortalezas": ["string", "string", "string", "string", "string"],
-      "retos": ["string", "string", "string"],
+      "descripcion": "string (concisa y alentadora, máximo 2 párrafos, reducida un 25% respecto a lo habitual)",
+      "fortalezas": ["string", "string", "string"],
+      "retos": ["string", "string"],
       "recomendaciones": ["string", "string", "string"]
     }
   }
@@ -97,6 +79,7 @@ FORMATO DE SALIDA JSON:
 
 REGLAS:
 - Tono: Maestro/Coach Senior.
-- La descripción debe ser rica y personalizada.
+- La descripción debe ser rica y personalizada, pero más breve y al grano.
+- Las fortalezas y retos deben ser concisos.
 - Devuelve SOLO el JSON.
 `;

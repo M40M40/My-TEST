@@ -15,6 +15,7 @@ export interface Question {
   id: number;
   text: string;
   code: VitalCode;
+  inversa: boolean;
 }
 
 export type Answers = { [key: number]: number };

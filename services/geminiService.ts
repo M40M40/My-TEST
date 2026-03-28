@@ -7,7 +7,12 @@ export const getVitalCodeReport = async (answers: Answers): Promise<Report> => {
   // 1. Cálculo matemático de puntuaciones (se mantiene igual por precisión)
   const scores: Score[] = Object.values(VitalCode).map(code => {
     const codeQuestions = QUESTIONS.filter(q => q.code === code);
-    const puntos = codeQuestions.reduce((sum, q) => sum + (answers[q.id] || 0), 0);
+    const puntos = codeQuestions.reduce((sum, q) => {
+      const ans = answers[q.id] || 0;
+      if (ans === 0) return sum;
+      const finalAns = q.inversa ? (5 - ans) : ans;
+      return sum + finalAns;
+    }, 0);
     return { codigo: code, puntos };
   });
 

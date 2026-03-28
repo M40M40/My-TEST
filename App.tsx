@@ -14,14 +14,12 @@ const App: React.FC = () => {
   const [appState, setAppState] = useState<AppState>('intro');
   const [report, setReport] = useState<Report | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [userEmail, setUserEmail] = useState<string>('');
 
   const handleIntroFinish = () => {
     setAppState('login');
   };
 
-  const handleLogin = (email: string) => {
-    setUserEmail(email);
+  const handleLogin = () => {
     setAppState('welcome');
   };
 
@@ -35,7 +33,6 @@ const App: React.FC = () => {
     setAppState('login');
     setReport(null);
     setError(null);
-    setUserEmail('');
   }
 
   const handleTestSubmit = async (answers: Answers) => {
@@ -62,7 +59,7 @@ const App: React.FC = () => {
       case 'loading':
         return <LoadingScreen />;
       case 'results':
-        return <ResultsScreen report={report} error={error} onRestart={restartTest} userEmail={userEmail} />;
+        return <ResultsScreen report={report} error={error} onRestart={restartTest} />;
       case 'login':
       default:
         return <LoginScreen onLogin={handleLogin} />;

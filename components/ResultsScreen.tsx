@@ -60,10 +60,9 @@ interface ResultsScreenProps {
   report: Report | null;
   error: string | null;
   onRestart: () => void;
-  userEmail: string;
 }
 
-const ResultsScreen: React.FC<ResultsScreenProps> = ({ report, error, onRestart, userEmail }) => {
+const ResultsScreen: React.FC<ResultsScreenProps> = ({ report, error, onRestart }) => {
   const [showShareModal, setShowShareModal] = useState(false);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
@@ -74,13 +73,41 @@ const ResultsScreen: React.FC<ResultsScreenProps> = ({ report, error, onRestart,
     try {
       const { jsPDF } = (window as any).jspdf;
       const html2canvas = (window as any).html2canvas;
+      
+      // Ocultar botones para que no salgan en el PDF
+      const buttonsDiv = resultsRef.current.querySelector('.pdf-exclude') as HTMLElement;
+      if (buttonsDiv) buttonsDiv.style.display = 'none';
+
       const canvas = await html2canvas(resultsRef.current, { scale: 2, useCORS: true, backgroundColor: '#2F3135' });
+      
+      // Restaurar botones
+      if (buttonsDiv) buttonsDiv.style.display = '';
+
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`Informe_Vital_${(userEmail || 'usuario').split('@')[0]}.pdf`);
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      
+      // Pintar el fondo del PDF para evitar bordes blancos si la imagen se reduce
+      pdf.setFillColor('#2F3135');
+      pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+
+      let imgWidth = pageWidth;
+      let imgHeight = (canvas.height * pageWidth) / canvas.width;
+
+      // Escalar para que quepa estrictamente en una sola página
+      if (imgHeight > pageHeight) {
+        const ratio = pageHeight / imgHeight;
+        imgHeight = pageHeight;
+        imgWidth = imgWidth * ratio;
+      }
+
+      // Centrar la imagen en la página
+      const xOffset = (pageWidth - imgWidth) / 2;
+      const yOffset = (pageHeight - imgHeight) / 2;
+
+      pdf.addImage(imgData, 'PNG', xOffset, yOffset, imgWidth, imgHeight);
+      pdf.save(`Informe_Vital_usuario.pdf`);
     } catch (err) {
       console.error("PDF generation error:", err);
       alert("Hubo un problema técnico al generar el PDF. Por favor intenta hacer una captura de pantalla.");
@@ -174,16 +201,7 @@ const ResultsScreen: React.FC<ResultsScreenProps> = ({ report, error, onRestart,
           <ScoresChart scores={puntuaciones} />
         </div>
 
-        <div className="text-center pt-12 border-t border-white/5 relative z-10">
-          {/* Mensaje de confirmación de email simulado para satisfacer al usuario */}
-          <div className="mb-10 p-6 bg-green-900/10 rounded-2xl border border-green-500/20 inline-block max-w-lg">
-            <p className="text-green-200/80 text-sm">
-               <span className="text-green-400 font-bold mr-2">✓</span> 
-               Informe generado exitosamente. <br/>
-               Se ha vinculado el resultado a la cuenta <strong>{userEmail}</strong>.
-            </p>
-          </div>
-          
+        <div className="text-center pt-12 border-t border-white/5 relative z-10 pdf-exclude">
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button onClick={downloadPdf} disabled={isGeneratingPdf} className="w-full sm:w-auto px-10 py-5 bg-white text-azul-humo font-bold rounded-full shadow-2xl hover:bg-oro-profundo hover:text-white transition-all disabled:opacity-50 flex items-center justify-center group">
                 {isGeneratingPdf ? (
