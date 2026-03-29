@@ -26,36 +26,6 @@ const ScoresChart: React.FC<{ scores: Score[] }> = ({ scores }) => {
   );
 };
 
-const ShareModal: React.FC<{ report: Report; onClose: () => void }> = ({ report, onClose }) => {
-  const [copyButtonText, setCopyButtonText] = useState('Copiar enlace');
-  const { principal, informe } = report.resultado;
-  const shareUrl = window.location.href;
-  const shareText = `He descubierto mi Código Vital: ${informe?.perfil || principal}.`;
-
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(`${shareText} ${shareUrl}`).then(() => {
-      setCopyButtonText('¡Copiado!');
-      setTimeout(() => setCopyButtonText('Copiar enlace'), 2000);
-    });
-  };
-
-  return (
-    <div className="fixed inset-0 bg-azul-humo/95 flex items-center justify-center z-50 p-4 animate-fade-in" onClick={onClose}>
-      <div className="bg-gris-carbon rounded-3xl shadow-2xl p-8 w-full max-w-sm text-beige-lunar border border-oro-profundo/20" onClick={(e) => e.stopPropagation()}>
-        <h3 className="text-xl font-bold text-center mb-6">Compartir mi Esencia</h3>
-        <div className="space-y-4">
-          <button onClick={handleCopyLink} className="w-full px-4 py-4 bg-azul-humo hover:bg-oro-profundo hover:text-azul-humo font-bold rounded-xl transition-all border border-oro-profundo/30">
-            {copyButtonText}
-          </button>
-          <button onClick={onClose} className="w-full px-4 py-3 text-beige-lunar/60 hover:text-white transition-all">
-            Cerrar
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 interface ResultsScreenProps {
   report: Report | null;
   error: string | null;
@@ -63,7 +33,6 @@ interface ResultsScreenProps {
 }
 
 const ResultsScreen: React.FC<ResultsScreenProps> = ({ report, error, onRestart }) => {
-  const [showShareModal, setShowShareModal] = useState(false);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
   
@@ -213,9 +182,6 @@ const ResultsScreen: React.FC<ResultsScreenProps> = ({ report, error, onRestart 
                     </>
                 )}
             </button>
-            <button onClick={() => setShowShareModal(true)} className="w-full sm:w-auto px-10 py-5 bg-oro-profundo text-azul-humo font-bold rounded-full shadow-2xl hover:bg-white transition-all">
-                Compartir Resultado
-            </button>
           </div>
           
           <button onClick={onRestart} className="mt-12 text-beige-lunar/30 hover:text-oro-profundo transition-all text-xs uppercase tracking-[0.2em] font-bold">
@@ -223,7 +189,6 @@ const ResultsScreen: React.FC<ResultsScreenProps> = ({ report, error, onRestart 
           </button>
         </div>
       </div>
-      {showShareModal && <ShareModal report={report} onClose={() => setShowShareModal(false)} />}
     </>
   );
 };
