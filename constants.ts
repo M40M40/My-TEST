@@ -1,5 +1,5 @@
 
-import { VitalCode, type Question } from './types';
+import { VitalCode, type Question } from './types.js'
 
 export const QUESTIONS: Question[] = [
   { id: 1, text: "Cuando un grupo duda sobre qué hacer, suelen acabar mirando en tu dirección para decidir.", code: VitalCode.Lider, inversa: false },
